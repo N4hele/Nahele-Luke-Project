@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.lang.Thread.State;
 
 public class Racer {
 
@@ -6,11 +7,12 @@ public class Racer {
     private int distance;
     private Color color;
     private String name;
+    private int startX;
     
-    public Racer(String name, Color color) {
+    public Racer(String name, int startX) {
         this.name = name;
-        this.color = color;
         this.distance = 0;
+        this.startX = startX;
     }
 
     // Note: all of this classes instance variables are private.  The only way for 
@@ -19,6 +21,10 @@ public class Racer {
     
     public int getDistance () {
         return (distance);
+    }
+
+    public int getStartX (){
+        return startX;
     }
     
     public void moved(int n) {
