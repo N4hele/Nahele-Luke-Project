@@ -29,8 +29,6 @@
     // constructor
     public MashRace() {
 
-        windowHeight = 500;
-        
         myFrame = new JFrame("Mash Racers");
         myFrame.add(this);
         myFrame.setSize(windowWidth, windowHeight);
