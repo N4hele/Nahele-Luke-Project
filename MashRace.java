@@ -20,8 +20,8 @@
     int topBorder = 10; // allow for the menu bar at the top of the frame
     int border = 10; // the border around the dots
     int sideBorder = startLine; // space after the finishLine
-    int windowWidth = trackLength + startLine + 50;
-    int windowHeight; // this gets set in the constructor
+    int windowWidth = 500;
+    int windowHeight= 500;
 
     // This ArrayList holds the Dot objects in the race
     ArrayList<Racer> racers = new ArrayList<Racer>();
