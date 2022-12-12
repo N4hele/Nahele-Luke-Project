@@ -13,6 +13,7 @@ public class Racer {
         this.name = name;
         this.distance = 0;
         this.startX = startX;
+        this.color = Color.green;
     }
 
     // Note: all of this classes instance variables are private.  The only way for 
@@ -33,6 +34,10 @@ public class Racer {
     
     public Color getColor() {
         return(color);
+    }
+
+    public void setColor(Color c){
+        color = c;
     }
     
     public String getName() {

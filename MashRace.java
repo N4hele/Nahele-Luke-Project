@@ -10,32 +10,28 @@ public class MashRace extends JPanel {
     private JFrame myFrame;
     private Random randGen = new Random();
 
-    // the length in pixels of the track
-    int trackLength = 300;
-    int startLine = 50;
-    // number of milliseconds (one thousanth of a second) to pause between each cycle
-    int pauseTime = 15;
-    Racer winnaWinnaWinn; // who has won (or null if nobody)
-    int winnaEffectDiameter; // for the special effects at end
-    int defaultDiameter = 70; // default diameter for the dot
-
-    int topBorder = 10; // allow for the menu bar at the top of the frame
-    int border = 10; // the border around the dots
-    int sideBorder = startLine; // space after the finishLine
     int windowWidth = 600;
     int windowHeight= 1000;
-
- 
+    boolean endgame;
     int racerY = 900;
+    Color randColor = Color.green;
+    
 
-
-
-
-
-
-    // This ArrayList holds the Dot objects in the race
     ArrayList<Racer> racers = new ArrayList<Racer>();
-    // constructor
+
+    ArrayList<Color> colors = new ArrayList<Color>() {
+        {
+
+            add(Color.blue);
+            add(Color.cyan);
+            add(Color.green);
+            add(Color.magenta);
+            add(Color.yellow);
+            add(Color.orange);
+            add(Color.pink);
+        }
+    };
+
     public MashRace() {
         KeyListener listener = new MyKeyListener();
 		addKeyListener(listener);
@@ -85,31 +81,33 @@ public class MashRace extends JPanel {
 		public void keyReleased(KeyEvent e) {
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("A") && endgame == false){
                 racers.get(0).moved(-10);
+                racers.get(0).setColor(nextColor());
             }
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("L") && endgame == false){
                 racers.get(1).moved(-10);
+                racers.get(1).setColor(nextColor());
 		    }
         }
     }
 
-    private boolean endgame;
+    
     public void drawRacer(Racer racer, Graphics g) {
         int topX = racer.getStartX();
         int topY = racerY + racer.getDistance();
         int drawDiam = 50;
         if(topY<100){
             g.setFont(new Font("Ariel", Font.BOLD, 72));
-            g.drawString(racer.getName() + " WINS", 65, 97);
+            g.drawString(racer.getName() + " WINS", 60, 97);
             System.out.println(racer.getName() + " WINS");
             endgame = true;
         }
 
-        g.setColor(Color.green);
+
+        g.setColor(racer.getColor());
         g.fillOval(topX, topY, drawDiam, drawDiam);
         g.setColor(Color.black);
         g.drawOval(topX, topY, drawDiam, drawDiam);
 
-       
         g.setColor(Color.white);
         g.fillOval(topX, topY, drawDiam-30, drawDiam-30);
         g.fillOval(topX+30, topY, drawDiam-30, drawDiam-30);
@@ -120,11 +118,26 @@ public class MashRace extends JPanel {
 
         g.fillOval(topX+5, topY, drawDiam-40, drawDiam-40);
         g.fillOval(topX+35, topY, drawDiam-40, drawDiam-40);
-
-        
-
     }
 
 
+
+
     
+
+
+
+    int counter = 0;
+    public Color nextColor() {
+        counter++;
+        if(counter < 4)
+            return Color.cyan;
+        if(counter < 7)
+            return Color.yellow;
+
+        if(counter > 8)
+            counter = 0;
+        return Color.magenta;
+    }
+
 }
