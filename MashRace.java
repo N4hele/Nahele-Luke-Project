@@ -1,9 +1,10 @@
 import java.awt.*;
 import javax.swing.*;
+import java.util.*;
 import java.util.Random;
 import java.util.ArrayList;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class MashRace extends JPanel {
 
@@ -33,14 +34,16 @@ public class MashRace extends JPanel {
     };
 
     public MashRace() {
-        KeyListener listener = new MyKeyListener();
-		addKeyListener(listener);
-		setFocusable(true);
+        
         initRacers();
         myFrame = new JFrame("Mash Racers");
         myFrame.add(this);
         myFrame.setSize(windowWidth, windowHeight);
+        KeyListener listener = new MyKeyListener();
+		addKeyListener(listener);
+		myFrame.setFocusable(true);
         myFrame.setVisible(true);
+        
         runRace();
     }
 
@@ -50,13 +53,20 @@ public class MashRace extends JPanel {
     }
 
     public void runRace(){
-        while(endgame == false){
-            
-        }
+        JOptionPane.showMessageDialog(this,
+        "Player 1 press 'A' to grow your catapillar\nPlayer 2 press 'L'");
+        // while(endgame == false){
+        // }
     }
-
+    
+    
+  
+    boolean startrace = false;
     public void paintComponent(Graphics g){
-        super.repaint();
+
+        
+        g.setColor(Color.black);
+
         g.drawLine(-100, 101, 700 , 101);
         g.drawLine(-100, 102, 700 , 102);
         g.drawLine(-100, 103, 700 , 103);
@@ -79,14 +89,17 @@ public class MashRace extends JPanel {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
+            System.out.println("test");
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("A") && endgame == false){
                 racers.get(0).moved(-10);
                 racers.get(0).setColor(nextColor());
+                
             }
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("L") && endgame == false){
                 racers.get(1).moved(-10);
                 racers.get(1).setColor(nextColor());
 		    }
+            repaint();
         }
     }
 
@@ -120,12 +133,10 @@ public class MashRace extends JPanel {
         g.fillOval(topX+35, topY, drawDiam-40, drawDiam-40);
     }
 
-
-
-
-    
-
-
+    public void waitfor(int time){
+        try {Thread.sleep(time); //milliseconds
+            }catch(Exception e){}
+    }
 
     int counter = 0;
     public Color nextColor() {
@@ -137,7 +148,7 @@ public class MashRace extends JPanel {
 
         if(counter > 8)
             counter = 0;
-        return Color.magenta;
+        return Color.green;
     }
 
 }
