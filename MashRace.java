@@ -44,8 +44,7 @@ public class MashRace extends JPanel {
         myFrame.add(this);
         myFrame.setSize(windowWidth, windowHeight);
         myFrame.setVisible(true);
-        
-        runRace();
+
     }
 
     public void initRacers(){
@@ -53,18 +52,9 @@ public class MashRace extends JPanel {
         racers.add(new Racer("Racer 2", 400));
     }
 
-    public void runRace(){
-        // JOptionPane.showMessageDialog(this,
-        // "Player 1 press 'A' to grow your catapillar\nPlayer 2 press 'L'");
-        // while(endgame == false){
-        // }
-    }
-    
-    
   
-    boolean startrace = false;
     public void paintComponent(Graphics g){
-        super.repaint();
+        // super.repaint();
         
 
         g.drawLine(-100, 101, 700 , 101);
@@ -82,29 +72,7 @@ public class MashRace extends JPanel {
         
     }
 
-    public class MyKeyListener implements KeyListener{
-        @Override
-		public void keyTyped(KeyEvent e) {
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-            if(KeyEvent.getKeyText(e.getKeyCode()).equals("A") && endgame == false){
-                racers.get(0).moved(-10);
-                racers.get(0).setColor(nextColor(1));
-                
-            }
-            if(KeyEvent.getKeyText(e.getKeyCode()).equals("L") && endgame == false){
-                racers.get(1).moved(-10);
-                racers.get(1).setColor(nextColor(2));
-		    }
-            //repaint();
-        }
-    }
+    
 
     
     public void drawRacer(Racer racer, Graphics g) {
@@ -160,4 +128,28 @@ public class MashRace extends JPanel {
         return Color.green;
     }
 
-}
+    public class MyKeyListener implements KeyListener{
+        @Override
+		public void keyTyped(KeyEvent e) {
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+            if(KeyEvent.getKeyText(e.getKeyCode()).equals("A") && endgame == false){
+                racers.get(0).moved(-10);
+                racers.get(0).setColor(nextColor(1));
+                
+            }
+            if(KeyEvent.getKeyText(e.getKeyCode()).equals("L") && endgame == false){
+                racers.get(1).moved(-10);
+                racers.get(1).setColor(nextColor(2));
+		    }
+            repaint();
+        }
+    }
+
+}//final commit
