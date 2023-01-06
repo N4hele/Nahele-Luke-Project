@@ -9,7 +9,6 @@ import java.awt.event.KeyListener;
 public class MashRace extends JPanel {
 
     private JFrame myFrame;
-    private Random randGen = new Random();
 
     int windowWidth = 600;
     int windowHeight= 1000;
@@ -17,7 +16,6 @@ public class MashRace extends JPanel {
     int racerY = 900;
     Color randColor = Color.green;
     
-
     ArrayList<Racer> racers = new ArrayList<Racer>();
 
     ArrayList<Color> colors = new ArrayList<Color>() {
@@ -52,11 +50,8 @@ public class MashRace extends JPanel {
         racers.add(new Racer("Racer 2", 400));
     }
 
-  
     public void paintComponent(Graphics g){
-        // super.repaint();
         
-
         g.drawLine(-100, 101, 700 , 101);
         g.drawLine(-100, 102, 700 , 102);
         g.drawLine(-100, 103, 700 , 103);
@@ -71,9 +66,6 @@ public class MashRace extends JPanel {
         }
         
     }
-
-    
-
     
     public void drawRacer(Racer racer, Graphics g) {
         int topX = racer.getStartX();
@@ -85,7 +77,6 @@ public class MashRace extends JPanel {
             System.out.println(racer.getName() + " WINS");
             endgame = true;
         }
-
 
         g.setColor(racer.getColor());
         g.fillOval(topX, topY, drawDiam, drawDiam);
