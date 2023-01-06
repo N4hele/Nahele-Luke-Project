@@ -13,7 +13,7 @@ public class MashRace extends JPanel {
 
     int windowWidth = 600;
     int windowHeight= 1000;
-    boolean endgame;
+    boolean endgame = false;
     int racerY = 900;
     Color randColor = Color.green;
     
@@ -34,14 +34,15 @@ public class MashRace extends JPanel {
     };
 
     public MashRace() {
-        
+        KeyListener listener = new MyKeyListener();
+		addKeyListener(listener);
+        setFocusable(true);
+
         initRacers();
+        
         myFrame = new JFrame("Mash Racers");
         myFrame.add(this);
         myFrame.setSize(windowWidth, windowHeight);
-        KeyListener listener = new MyKeyListener();
-		addKeyListener(listener);
-		myFrame.setFocusable(true);
         myFrame.setVisible(true);
         
         runRace();
@@ -53,8 +54,8 @@ public class MashRace extends JPanel {
     }
 
     public void runRace(){
-        JOptionPane.showMessageDialog(this,
-        "Player 1 press 'A' to grow your catapillar\nPlayer 2 press 'L'");
+        // JOptionPane.showMessageDialog(this,
+        // "Player 1 press 'A' to grow your catapillar\nPlayer 2 press 'L'");
         // while(endgame == false){
         // }
     }
@@ -63,14 +64,17 @@ public class MashRace extends JPanel {
   
     boolean startrace = false;
     public void paintComponent(Graphics g){
-
+        super.repaint();
         
-        g.setColor(Color.black);
 
         g.drawLine(-100, 101, 700 , 101);
         g.drawLine(-100, 102, 700 , 102);
         g.drawLine(-100, 103, 700 , 103);
         g.drawLine(-100, 104, 700 , 104);
+
+        g.setFont(new Font("Ariel", Font.BOLD, 20));
+        g.drawString("MASH A",30, 800);
+        g.drawString("MASH L", 480, 800);
 
         for(Racer r:racers){
             drawRacer(r, g);
@@ -89,17 +93,16 @@ public class MashRace extends JPanel {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-            System.out.println("test");
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("A") && endgame == false){
                 racers.get(0).moved(-10);
-                racers.get(0).setColor(nextColor());
+                racers.get(0).setColor(nextColor(1));
                 
             }
             if(KeyEvent.getKeyText(e.getKeyCode()).equals("L") && endgame == false){
                 racers.get(1).moved(-10);
-                racers.get(1).setColor(nextColor());
+                racers.get(1).setColor(nextColor(2));
 		    }
-            repaint();
+            //repaint();
         }
     }
 
@@ -139,12 +142,18 @@ public class MashRace extends JPanel {
     }
 
     int counter = 0;
-    public Color nextColor() {
+    public Color nextColor(int racer) {
         counter++;
-        if(counter < 4)
-            return Color.cyan;
-        if(counter < 7)
+        if(counter < 4){
+            if(racer == 1)
+                return Color.cyan;
+            return Color.blue;
+        }
+        if(counter < 7){
+            if(racer == 1)
+                return Color.magenta;
             return Color.yellow;
+        }
 
         if(counter > 8)
             counter = 0;
